@@ -77,8 +77,26 @@ def case5(i):
     print(" [x] Sent %r:%r" % (routing_key, message))
     connection.close()
 
-i = 0
-while True:
-    i = i + 1
-    case5(i)
-    time.sleep(1)
+def main5():
+    i = 0
+    while True:
+        i = i + 1
+        case5(i)
+        time.sleep(1)
+
+def case6():
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+    channel = connection.channel()
+    channel.confirm_delivery()
+    channel.exchange_declare(exchange='test_immediate',
+                             exchange_type='direct')
+    channel.basic_publish(exchange = 'test_immediate',
+                          routing_key = "test",
+                          body = "hello",
+                          properties = pika.BasicProperties(
+                              delivery_mode = 2, # make message persistent
+                          ),
+                          mandatory = False,
+                          immediate = True)
+    pika.SelectConnection
+    pika.BasicProperties
