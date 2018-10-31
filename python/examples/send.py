@@ -98,5 +98,3 @@ def case6():
                           ),
                           mandatory = False,
                           immediate = True)
-    pika.SelectConnection
-    pika.BasicProperties

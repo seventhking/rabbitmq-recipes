@@ -10,7 +10,6 @@ class FibonacciRpcClient(object):
 
         result = self.channel.queue_declare(exclusive=True)
         self.callback_queue = result.method.queue
-
         self.channel.basic_consume(self.on_response, no_ack=True,
                                    queue=self.callback_queue)
 
